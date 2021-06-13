@@ -1,0 +1,26 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vtquan123/typescript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vtquan123/typescript/issues"
+  },
+  "homepage": "https://github.com/Vtquan123/typescript#readme",
+  "dependencies": {
+    "@types/node": "^15.12.2",
+    "axios": "^0.21.1",
+    "ts-node": "^10.0.0",
+    "tslib": "^2.3.0"
+  }
+}
