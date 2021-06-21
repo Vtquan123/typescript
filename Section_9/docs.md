@@ -1,0 +1,3 @@
+# Section 9 - Design patterns with Typescript
+- To import external Js library, Typescript needs a __Type definition file__, it's is kind of an adaptor between typescript code that we write in Js libraries that we try to work with in type.  Type definition file tells typescript complier all the different functions that are available inside this Js library, what type of argument they take and what type of value they return.
+- To install type definition file, use definitely typed naming scheme: __@types/{library name}__
