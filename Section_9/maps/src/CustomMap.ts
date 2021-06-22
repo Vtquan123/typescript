@@ -1,7 +1,6 @@
 import {User} from './User'
 import { Company } from './Company'
-
- export interface Mappable {
+export interface Mappable {
   location: {
     lat: number,
     lng: number
@@ -9,9 +8,6 @@ import { Company } from './Company'
   markerContent(): string
   color: string
 }
-
-
-
 export class CustomMap {
   private googleMap: google.maps.Map
 

@@ -1,4 +1,6 @@
 // Tuple
+
+// Object drink
 const drink = {
   color: 'brown',
   carbonated: true,
@@ -7,6 +9,7 @@ const drink = {
 
 // type alias
 type Drink = [string, boolean, number]
+
 const pepsi_alias: Drink = ['brown', true, 40]
 const coca_cola: Drink= ['brown', true, 40]
 
