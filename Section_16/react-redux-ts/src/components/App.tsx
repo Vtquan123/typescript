@@ -85,4 +85,60 @@ const testRecord: Obj = {
   // name: '100'
 };
 
+///////////////////////////////////////////////////
+type literalType = {
+  first: 1;
+  second: 2;
+};
+
+type Result = {
+  [key in literalType[keyof literalType]]: number;
+};
+
+///////////////////////////////////////////////////
+type ObjectTypeA = {
+  firstProp: number;
+  sharedProp: string;
+};
+
+type ObjectTypeB = {
+  secondProp: boolean;
+  sharedProp: string;
+};
+
+type Union = ObjectTypeA | ObjectTypeB;
+
+///////////////////////////////////////////////////
+type A = "a" | "b";
+type B = "b" | "c";
+type C = A & B;
+
+///////////////////////////////////////////////////
+type conditional<T, A> = T extends A ? A : T;
+
+///////////////////////////////////////////////////
+type Exclude<T, A> = T extends A ? never : T;
+// Inferred Type: "a" | "b"
+type Result1 = Exclude<1 | "a" | 2 | "b", number>;
+
+///////////////////////////////////////////////////
+type Extract<T, A> = T extends A ? T : never
+// Inferred Type: 1 | 2
+type Result2 = Extract<1 | "a" | 2 | "b", number>;
+
+///////////////////////////////////////////////////
+type UppercaseWes = Uppercase<"wes">;
+type LowercaseWes = Lowercase<"Wes">;
+type CapitalizeWes = Capitalize<"wes">;
+type UncapitalizeWes = Uncapitalize<"Wes">;
+
+///////////////////////////////////////////////////
+//React.HTMLProps<HTMLXXXElement>
+const Input = (props: React.HTMLProps<HTMLInputElement>)
+
+///////////////////////////////////////////////////
+//Copying Props
+//We can create a type for props out of the prop type of another component—even if we don't have direct access to the type itself.
+type CopiedProps = React.ComponentProps<typeof CurrentUser>
+  
 export const App = connect(mapStateToProps, { fetchTodos, deleteTodo })(_App);
