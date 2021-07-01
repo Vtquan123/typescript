@@ -1,4 +1,4 @@
-import {User} from './User'
+import { User } from './User'
 import { Company } from './Company'
 export interface Mappable {
   location: {
@@ -13,12 +13,12 @@ export class CustomMap {
 
   constructor(divId: string) {
     this.googleMap = new google.maps.Map(document.getElementById(divId), {
-  zoom: 1,
-  center: {
-    lat: 0,
-    lng: 0
-  }
-})
+      zoom: 16,
+      center: {
+        lat: 21.045665824959475,
+        lng: 105.84317897364204
+      }
+    })
   }
   // Bad code
   // addUserMarker(user: User):void {
@@ -52,9 +52,9 @@ export class CustomMap {
   //     }
   //   })
   // }
-  
+
   // Best Solution
-  addMarker(mappable: Mappable){
+  addMarker(mappable: Mappable) {
     const marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
@@ -69,7 +69,4 @@ export class CustomMap {
       infoWindow.open(this.googleMap, marker)
     })
   }
-
-
-
 }

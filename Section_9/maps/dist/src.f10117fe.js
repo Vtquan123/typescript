@@ -136954,10 +136954,10 @@ var CustomMap =
 function () {
   function CustomMap(divId) {
     this.googleMap = new google.maps.Map(document.getElementById(divId), {
-      zoom: 1,
+      zoom: 16,
       center: {
-        lat: 0,
-        lng: 0
+        lat: 21.045665824959475,
+        lng: 105.84317897364204
       }
     });
   } // Bad code
@@ -137061,7 +137061,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49983" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63956" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
