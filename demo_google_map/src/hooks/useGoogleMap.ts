@@ -9,11 +9,12 @@ export interface MapProps {
     lat: number,
     lng: number,
   }
-  additionalOptions?: LoaderOptions
+  additionalOptions?: LoaderOptions,
+  mapOption?: google.maps.MapOptions
 }
 
 
-export const useGoogleMap = <T extends HTMLElement>({ zoom, center, additionalOptions, ...props }: MapProps) => {
+export const useGoogleMap = <T extends HTMLElement>({ zoom, center, additionalOptions,mapOption }: MapProps) => {
   const [mapState, setMapState] = useState<{loading: boolean, map?:google.maps.Map}>({ loading: true })
   const mapRef = useRef<T>(null)
 
@@ -27,7 +28,8 @@ export const useGoogleMap = <T extends HTMLElement>({ zoom, center, additionalOp
       const map = new google.maps.Map(mapRef.current as T, {
         zoom,
         center,
-        ...props
+        streetViewControl: false,
+        ...mapOption
       })
       setMapState({loading: false, map:map})
     })
