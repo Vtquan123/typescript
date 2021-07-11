@@ -33,6 +33,10 @@ const roundedRect = (ctx: any, x: number, y: number, width: number, height: numb
   // ctx.fill();
 };
 
+const circle = (ctx: any, x: number, y: number, radius: number, startArc: number, endArc: number) => {
+  ctx.arc(x,y,radius, startArc, endArc, true)
+}
+
 const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
   const { mapRef, loading, map } = useGoogleMap<HTMLDivElement>({ zoom, center, additionalOptions, mapOption })
   console.log(map)
@@ -44,12 +48,26 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
   const driverImage = () => {
     const canvas = document.createElement('CANVAS') as HTMLCanvasElement
     canvas.height = 50
-    canvas.width = 68
+    canvas.width = 60
     const ctx = canvas.getContext('2d') as NonNullable<CanvasRenderingContext2D>
     const rect = new Path2D()
     roundedRect(rect, 0, 0, 60, 35, 17.5, true, 5, 5);
+    ctx.fillStyle = '#160E4D'
     ctx.fill(rect)
     return canvas.toDataURL()
+  }
+
+    const node = () => {
+      const canvas = document.createElement('CANVAS') as HTMLCanvasElement
+      canvas.height = 20
+      canvas.width = 20
+      const ctx = canvas.getContext('2d') as NonNullable<CanvasRenderingContext2D>
+      const node = new Path2D()
+      circle(node, 10, 10, 6, 0, Math.PI * 2)
+      ctx.strokeStyle = '#160E4D'
+      ctx.lineWidth= 7
+      ctx.stroke(node)
+      return canvas.toDataURL()
   }
 
   const test = 5
@@ -67,23 +85,80 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
       icon: {
         url: driverImage(),
         labelOrigin: new google.maps.Point(30, 17),
+        anchor: new google.maps.Point(30, 45),
       },
       zIndex: 0,
     })
-    const marker1 = new google.maps.Marker({
-      position: { lat: 49.259610739691574, lng: -123.0687063851476 },
+    const marker0 = new google.maps.Marker({
+      position: center,
       map: map,
-      draggable: true,
+      icon: {
+        url: node(),
+        anchor: new google.maps.Point(10, 0),
+      },
+      zIndex: 1,
     })
+        const marker1 = new google.maps.Marker({
+      position: { lat: 49.269432796909385, lng: -123.069555841962},
+      map: map,
+      label: {
+        text: `x${test}`,
+        color: 'white',
+      },
+      icon: {
+        url: driverImage(),
+        labelOrigin: new google.maps.Point(30, 17),
+        // anchor: new google.maps.Point(0, 0),
+      },
+      zIndex: 0,
+    })
+    const marker1x = new google.maps.Marker({
+      position: { lat: 49.269432796909385, lng: -123.069555841962},
+      map: map,
+      icon: {
+        url: node(),
+        anchor: new google.maps.Point(13.5, 8),
+      },
+      zIndex: 1,
+    })
+
+            const marker3 = new google.maps.Marker({
+      position: { lat: 49.217979030235945, lng: -123.0701168023345},
+      map: map,
+      label: {
+        text: `x${test}`,
+        color: 'white',
+      },
+      icon: {
+        url: driverImage(),
+        labelOrigin: new google.maps.Point(30, 17),
+        // anchor: new google.maps.Point(0, 0),
+      },
+      zIndex: 0,
+    })
+    const marker3x = new google.maps.Marker({
+      position: { lat: 49.217979030235945, lng: -123.0701168023345},
+      map: map,
+      icon: {
+        url: node(),
+        anchor: new google.maps.Point(13.5, 8),
+      },
+      zIndex: 1,
+    })
+    // const marker1 = new google.maps.Marker({
+    //   position: { lat: 49.269432796909385, lng: -123.069555841962},
+    //   map: map,
+    //   draggable: true,
+    // })
     const marker2 = new google.maps.Marker({
       position: { lat: 49.2292438599974, lng: -122.95138647122144 },
       map: map
     })
-    const marker3 = new google.maps.Marker({
-      position: { lat: 49.23807162699124, lng: -123.01921204646 },
-      map: map,
-      draggable: true
-    })
+    // const marker3 = new google.maps.Marker({
+    //   position: { lat: 49.217979030235945, lng: -123.0701168023345},
+    //   map: map,
+    //   draggable: true
+    // })
     const marker4 = new google.maps.Marker({
       position: { lat: 30.35640041915142, lng: - 81.67468388895591 },
       map: map
@@ -158,21 +233,21 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
     let lineHeading = google.maps.geometry.spherical.computeHeading(pos1, pos2)
     console.log(lineHeading, "line heading")
     let markerA = new google.maps.Marker({
-      position: google.maps.geometry.spherical.computeOffset(pos1, lineLength / 3, 100),
+      position: google.maps.geometry.spherical.computeOffset(pos1, lineLength / 2, lineHeading - 20),
       map: map,
       icon: {
         url: "https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png",
         size: new google.maps.Size(10, 10),
-        anchor: new google.maps.Point(3.5, 3.5),
+        // anchor: new google.maps.Point(3.5, 3.5),
       }
     })
     let markerB = new google.maps.Marker({
-      position: google.maps.geometry.spherical.computeOffset(pos2, lineLength / 3, -30),
+      position: google.maps.geometry.spherical.computeOffset(pos2, lineLength / 3, -35),
       map: map,
       icon: {
         url: 'https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png',
         size: new google.maps.Size(10, 10),
-        anchor: new google.maps.Point(10, 10)
+        // anchor: new google.maps.Point(10, 10)
       }
     })
 
@@ -187,6 +262,17 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
       let lng4 = latlng4.lng()
 
       let points = []
+      const BQT1 = function (t: number) {
+        return (1-t) * (1-t);
+      }
+      
+      const BQT2 = function (t: number) {
+        return 2 * (1-t)*t;
+      }
+      
+      const BQT3 = function (t: number) {
+        return t * t;
+      }
 
       const B1 = function (t: number) {
         return t * t * t;
@@ -202,12 +288,14 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
       }
       const getBezier = function (C1: any, C2: any, C3: any, C4: any, percent: number) {
         let pos: any = {};
-        pos.x = C1.x * B1(percent) + C2.x * B2(percent) + C3.x * B3(percent) + C4.x * B4(percent);
-        pos.y = C1.y * B1(percent) + C2.y * B2(percent) + C3.y * B3(percent) + C4.y * B4(percent);
+        // pos.x = C1.x * B1(percent) + C2.x * B2(percent) + C3.x * B3(percent) + C4.x * B4(percent);
+        // pos.y = C1.y * B1(percent) + C2.y * B2(percent) + C3.y * B3(percent) + C4.y * B4(percent);
+        pos.x = C1.x * BQT1(percent) + C2.x * BQT2(percent)  + C4.x * BQT3(percent);
+        pos.y = C1.y * BQT1(percent) + C2.y * BQT2(percent) +  C4.y * BQT3(percent);
         return pos;
       }
 
-      for (let i = 0; i <= 1; i += resolution) {
+      for (let i = 0; i <= 1.00; i += resolution) {
         points.push(getBezier({
           x: lat1,
           y: lng1,
@@ -221,13 +309,14 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
           x: lat4,
           y: lng4,
         }, i))
+        i = Number(i.toFixed(2) )
       }
 
       let path = []
-      for (let i = 0; i < points.length - 1; i++) {
+      for (let i = 0; i < points.length; i++) {
         path.push(new google.maps.LatLng(points[i].x, points[i].y))
-        path.push(new google.maps.LatLng(points[i + 1].x, points[i + 1].y, false))
       }
+
 
       let Line = new google.maps.Polyline({
         path: path,
@@ -235,14 +324,14 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
         strokeOpacity: 0,
         icons: [{
           icon: {
-            path: 'M 0,-1 0,1',
+            path:  'M 0,-1 0,1',
             strokeOpacity: 1,
-            scale: 4
+            scale: 5,
           },
           offset: '0',
-          repeat: '20px',
+          repeat: '25px',
         }],
-        strokeColor: '#160E4D'
+        strokeColor: '#160E4D',
       })
 
       Line.setMap(map)
@@ -265,7 +354,7 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
   // })
 
   return <div>
-    <div ref={mapRef} style={{ height: 800, borderRadius: 20, overflow: 'hidden', marginBottom: 10 }}>
+    <div ref={mapRef} style={{ height: 600, borderRadius: 20, overflow: 'hidden', marginBottom: 10 }}>
       <div>
         {loading && <span>LOADING ...</span>}
       </div>
