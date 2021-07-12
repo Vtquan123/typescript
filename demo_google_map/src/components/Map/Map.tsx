@@ -51,16 +51,17 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
   const driverImage = () => {
     const canvas = document.createElement('CANVAS') as HTMLCanvasElement
     canvas.height = 50
-    canvas.width = 60
+    canvas.width = 70
     const ctx = canvas.getContext('2d') as NonNullable<CanvasRenderingContext2D>
     const rect = new Path2D()
-    roundedRect(rect, 0, 0, 60, 35, 17.5, true, 5, 5);
+    roundedRect(rect, 4, 4, 60, 35, 17.5, true, 5, 5);
     // const img = useIcon
     // img.src = '../../icon/store.svg'
     // img.onload = () => {
     // }
     ctx.fillStyle = '#160E4D'
     ctx.strokeStyle = '#fff'
+    ctx.lineWidth = 4
     ctx.stroke(rect)
     ctx.fill(rect)
     ctx.drawImage(iconLoaded!, 10, 7, 20, 20)
@@ -379,6 +380,9 @@ const Map = ({ zoom, center, additionalOptions, mapOption }: MapProps) => {
     }
 
     let curvedLine = GmapCubicBezier({ latlng1: pos1, latlng2: markerA.getPosition()!, latlng3: markerB.getPosition()!, latlng4: pos2, resolution: 0.01, map })
+
+    // DOM ELEMENTS //
+
   }
 
   ///////////////////////////////////////////////////////////////////////
